@@ -5,11 +5,23 @@ import { getHighlights, getTrending, listArticles } from "./services/newsService
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "0.0.0.0";
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 
 app.use(cors({
-  origin: [CLIENT_ORIGIN, "http://127.0.0.1:5173", "http://localhost:5173"]
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      CLIENT_ORIGIN,
+    ];
+    if (allowed.includes(origin) || origin.endsWith(".vercel.app")) {
+      return callback(null, true);
+    }
+    callback(new Error("Not allowed by CORS"));
+  }
 }));
 app.use(express.json());
 

@@ -187,6 +187,8 @@ export default function App() {
         toggleTheme={toggleTheme}
         refreshing={refreshing}
         onRefresh={refreshFeed}
+        onScrollToFeed={() => document.getElementById("feed")?.scrollIntoView({ behavior: "smooth" })}
+        onScrollToTop={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       />
 
       {/* Status notices */}

@@ -16,8 +16,10 @@ app.use(cors({
       "http://localhost:5173",
       "http://127.0.0.1:5173",
       CLIENT_ORIGIN,
+      "https://bytebymanas.me",
+      "https://www.bytebymanas.me",
     ];
-    if (allowed.includes(origin) || origin.endsWith(".vercel.app")) {
+    if (allowed.includes(origin) || origin.endsWith(".vercel.app") || origin.endsWith(".bytebymanas.me")) {
       return callback(null, true);
     }
     callback(new Error("Not allowed by CORS"));

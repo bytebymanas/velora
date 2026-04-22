@@ -13,7 +13,7 @@ import { FeedGrid, Pagination, SkeletonHero } from "./components/FeedGrid";
 import { Footer } from "./components/Footer";
 import { ScrollToTop } from "./components/ScrollToTop";
 
-const API = "http://localhost:8080/api";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 const TABS = [
   { label: "All News", value: "" },
